@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品集選單</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 選單 -->
+  <ul class="menu" id="menu">
+    <li><a href="#" onclick="hideIframe()">首頁</a></li>
+    <li><a href="#about">自我介紹</a></li>
+    <li class="dropdown">
+      <a href="#portfolio">作品集</a>
+      <ul class="submenu">
+        <li><a href="#" onclick="loadIframe('https://hackmd.io/@YuuuuuY/S1BxrIS5Jg')">第一周</a></li>
+        <li><a href="#" onclick="loadIframe('https://hackmd.io/@YuuuuuY/S1eydpDjyg')">第二周</a></li>
+        <li><a href="#" onclick="loadIframe('https://hackmd.io/@YuuuuuY/ByUuQbZhye')">第三周</a></li>
+        <li><a href="#" onclick="loadIframe('https://hackmd.io/@YuuuuuY/rkFrYu7aye')">第四周</a></li>
+      </ul>
+    </li>
+    <li><a href="#quiz">測驗卷</a></li>
+    <li><a href="#tutorials">教學影片</a></li>
+  </ul>
+
+  <!-- 嵌入的 iframe -->
+  <iframe id="content-frame" src="" frameborder="0" style="display: none;"></iframe>
+
+  <!-- p5.js 動畫 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <script src="sketch.js"></script>
+
+  <script>
+    // 動態載入 iframe 網頁
+    function loadIframe(url) {
+      const iframe = document.getElementById('content-frame');
+      iframe.src = url;
+      iframe.style.display = 'block'; // 顯示 iframe
+    }
+
+    // 隱藏 iframe
+    function hideIframe() {
+      const iframe = document.getElementById('content-frame');
+      iframe.style.display = 'none'; // 隱藏 iframe
+    }
+
+    // 顯示或隱藏選單（滑入滑出效果）
+    document.addEventListener('mousemove', (event) => {
+      const menu = document.getElementById('menu');
+      if (event.clientY < 250) {
+        menu.style.transition = 'transform 0.3s ease-in-out';
+        menu.style.transform = 'translateY(0)'; // 滑入
+      } else {
+        menu.style.transition = 'transform 0.3s ease-in-out';
+        menu.style.transform = 'translateY(-100%)'; // 滑出
+      }
+    });
+
+    // 頁面載入時隱藏選單
+    window.onload = () => {
+      const menu = document.getElementById('menu');
+      menu.style.transform = 'translateY(-100%)'; // 初始狀態隱藏
+    };
+  </script>
+</body>
+</html>
